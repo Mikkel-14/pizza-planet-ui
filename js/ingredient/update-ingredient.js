@@ -18,7 +18,7 @@ function loadInformation() {
 
 function putIngredient(ingredient) {
 
-    fetch('http://127.0.0.1:5000/ingredient/', {
+    return fetch('http://127.0.0.1:5000/ingredient/', {
         method: 'PUT',
         body: JSON.stringify(ingredient),
         headers: {
@@ -38,11 +38,13 @@ let ingredientForm = $("#ingredient-form");
 ingredientForm.submit(event => {
 
     let ingredient = getIngredientData();
-    putIngredient(ingredient);
+    putIngredient(ingredient)
+        .then(() => {
+            window.location.href = '/app/ingredient/ingredients.html';
+        });
 
     event.preventDefault();
     event.currentTarget.reset();
-    window.location.href = '/app/ingredient/ingredients.html';
 });
 
 /**
